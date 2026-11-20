@@ -2,7 +2,7 @@
 
 ![GitHub Actions](https://github.com/Dharshini2812/CloudHeal/actions/workflows/tests.yml/badge.svg)
 
-CloudHeal is a cloud-native DevOps monitoring and auto-recovery learning project that demonstrates application health monitoring, metrics collection, visualization, automated testing, containerization and Kubernetes-based recovery.
+CloudHeal is a cloud-native DevOps monitoring and auto-recovery learning project that demonstrates application health monitoring, metrics collection, visualization, automated testing, containerization, and Kubernetes-based recovery.
 
 The project uses Prometheus to collect application metrics, Grafana to visualize monitoring data, and Kubernetes liveness probes to automatically restart an unhealthy application container.
 
@@ -15,7 +15,7 @@ The project uses Prometheus to collect application metrics, Grafana to visualize
 - **Containerization:** Docker and Docker Compose.
 - **Auto-Recovery:** Kubernetes liveness probes automatically restart unhealthy containers.
 - **Automated Testing:** Pytest test cases.
-- **CI/CD:** GitHub Actions automatically runs tests on push and pull requests.
+- **CI/CD:** GitHub Actions automatically runs tests on pushes and pull requests.
 
 ## Technology Stack
 
@@ -39,6 +39,21 @@ The project uses Prometheus to collect application metrics, Grafana to visualize
 4. Kubernetes manages the application pod.
 5. Kubernetes liveness probes monitor `/health` and restart the container after repeated failures.
 6. GitHub Actions runs automated tests whenever code is pushed or a pull request is created.
+
+## Grafana Monitoring Dashboard
+
+The CloudHeal Grafana dashboard provides a visual overview of application health and performance.
+
+The dashboard includes six monitoring panels:
+
+- Application Health
+- CPU Usage
+- Memory Usage
+- HTTP Requests Per Second
+- Total HTTP Requests
+- Service Status
+
+![CloudHeal Grafana Monitoring Dashboard](cloudheal-dashboard.png)
 
 ## Project Structure
 
@@ -66,31 +81,32 @@ CloudHeal/
 ├── service.yaml
 ├── .dockerignore
 ├── .gitignore
+├── dashboard.png
 └── README.md
 ```
 
 ## Local Setup
 
-Create and activate a virtual environment:
+### 1. Create and activate a virtual environment
 
 ```powershell
 py -m venv .venv
 .venv\Scripts\Activate.ps1
 ```
 
-Install dependencies:
+### 2. Install dependencies
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-Start the application:
+### 3. Start the application
 
 ```powershell
 uvicorn main:app --reload
 ```
 
-Application URLs:
+### Application URLs
 
 - API: http://127.0.0.1:8000
 - Swagger API Documentation: http://127.0.0.1:8000/docs
@@ -105,7 +121,7 @@ Start all services:
 docker compose up --build
 ```
 
-Access the services:
+### Access the Services
 
 - CloudHeal API: http://localhost:8000
 - Prometheus: http://localhost:9090
@@ -117,14 +133,14 @@ Grafana's initial local login is `admin / admin`. Change the password after your
 
 CloudHeal was deployed using Docker Desktop Kubernetes.
 
-Apply the deployment and service configurations:
+### 1. Apply the deployment and service configurations
 
 ```powershell
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
 
-Check the deployment:
+### 2. Check the deployment
 
 ```powershell
 kubectl get pods
@@ -132,7 +148,7 @@ kubectl get deployments
 kubectl get services
 ```
 
-Access CloudHeal:
+### 3. Access CloudHeal
 
 http://localhost:30080
 
@@ -144,7 +160,7 @@ Trigger a simulated application failure:
 Invoke-RestMethod -Method Post -Uri http://localhost:30080/demo/fail
 ```
 
-Monitor the pod:
+Monitor the Kubernetes pod:
 
 ```powershell
 kubectl get pods -w
@@ -176,7 +192,8 @@ Run the test suite:
 python -m pytest -q
 ```
 
-**Latest local test result:**
+### Latest Local Test Result
+
 - 3 tests passed
 - 0 tests failed
 
@@ -187,7 +204,8 @@ GitHub Actions is configured to run automatically on:
 - Push events
 - Pull requests
 
-The workflow:
+### Workflow Steps
+
 1. Checks out the repository.
 2. Sets up Python 3.11.
 3. Installs project dependencies.
@@ -197,13 +215,14 @@ The workflow:
 
 ## Project Outcomes
 
-- Implemented application health monitoring.
-- Collected and visualized Prometheus metrics.
+- Implemented application health monitoring using FastAPI.
+- Collected application metrics using Prometheus.
 - Created Grafana monitoring dashboards and alert rules.
 - Containerized the application using Docker.
 - Deployed the application using Kubernetes.
 - Demonstrated automatic container restart after application failure.
-- Implemented automated testing and GitHub Actions CI.
+- Implemented automated testing using Pytest.
+- Configured GitHub Actions for continuous integration.
 
 ## Repository
 
